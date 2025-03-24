@@ -301,7 +301,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Arial" size="12" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="buscar Amigo"/>
+                <Property name="text" type="java.lang.String" value="Buscar Amigo"/>
               </Properties>
             </Component>
           </SubComponents>

@@ -317,13 +317,12 @@ public class VentanaMostrar extends javax.swing.JDialog {
     }
     
     private void mouseEntered(JPanel panel){
-        panel.setBackground(new Color(164, 146, 122));
+        panel.setBackground(new Color(100, 180, 170));
     }
     
     private void mouseExited(JPanel panel){
-        panel.setBackground(new Color(255,255,255));
+        panel.setBackground(new Color(120,200,190));
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnActualizar;
     private javax.swing.JPanel btnEliminar;

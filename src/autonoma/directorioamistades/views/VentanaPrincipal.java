@@ -192,7 +192,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/directorioamistades/images/buscarAmigo.png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel8.setText("buscar Amigo");
+        jLabel8.setText("Buscar Amigo");
 
         javax.swing.GroupLayout btnBuscarLayout = new javax.swing.GroupLayout(btnBuscar);
         btnBuscar.setLayout(btnBuscarLayout);
