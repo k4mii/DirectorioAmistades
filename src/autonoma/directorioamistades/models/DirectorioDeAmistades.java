@@ -1,15 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package autonoma.directorioamistades.models;
 
-/**
- *
- * @author PABLO VI
- */
+package autonoma.directorioamistades.models;
 import java.util.ArrayList;
 import java.util.List;
+/**
+ *
+ * @author johan 
+ */
+
 
 public class DirectorioDeAmistades {
     private List<Amigo> amigos;
@@ -25,31 +22,31 @@ public class DirectorioDeAmistades {
 
     public Amigo buscarAmigo(String correo) {
         //Excepción (?
-        for (Amigo amigo : amigos) {
-            if (amigo.getCorreoElectronico().equals(correo)) {
-                return amigo;
+        for (Amigo a : amigos) {
+            if (a.getCorreoElectronico().equals(correo)) {
+                return a;
             }
         }
         return null;
     }
 
-    public void verInfoAmigo(String correo) {
-        Amigo amigo = buscarAmigo(correo);
-        if (amigo != null) {
-            System.out.println("Nombre: " + amigo.getNombres());
-            System.out.println("Teléfono: " + amigo.getTelefono());
-            System.out.println("Correo Electrónico: " + amigo.getCorreoElectronico());
-        } else {
-            System.out.println("Amigo no encontrado.");
+    public String verInfoAmigo(String correoElectronico) {
+      for (Amigo a : amigos){
+          if(a.getCorreoElectronico().equals(correoElectronico)){
+              return a.toString();
+          }
+      }
+      return "No encontrado";
+    }
+
+    public boolean eliminarAmigo(String correoElectronico) {
+       for(int i = 0; i < amigos.size(); i++){
+           if (amigos.get(i).getCorreoElectronico().equals(correoElectronico)){
+                amigos.remove(i);
+                return true;
+            }
         }
+        return false;
     }
-
-    public void eliminarAmigo(String correo) {
-        amigos.removeIf(amigo -> amigo.getCorreoElectronico().equals(correo));
-    }
-
-    public void mostrarAcercaDe() {
-        System.out.println("Taller Directorio de amistades - Programación orientada a Objetos - Universidad Autonoma de Manizales");
-        System.out.println("Desarrollado por: Maria Camila Prada Cortes - Johan Andrés Villada Valencia");
-    }
+           
 }
