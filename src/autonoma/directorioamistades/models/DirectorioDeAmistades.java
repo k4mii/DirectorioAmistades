@@ -1,7 +1,7 @@
 
 package autonoma.directorioamistades.models;
 import java.util.ArrayList;
-import java.util.List;
+
 /**
  *
  * @author johan 
@@ -9,17 +9,37 @@ import java.util.List;
 
 
 public class DirectorioDeAmistades {
-    private List<Amigo> amigos;
+    private ArrayList <Amigo> amigos;
 
     public DirectorioDeAmistades() {
         this.amigos = new ArrayList<>();
     }
 
+    
+///////////////////////////////////////////////////////////////////////
+    ///Metodo mostrar libros
+    public ArrayList<Amigo> getAmigos(){
+        return this.amigos;
+    }
+    
+    
     public void agregarAmigo(Amigo a) {
         //Verificacion (? excepción (?
         amigos.add(a);
     }
 
+    
+///////////////////////////////////////////////////////////////////////
+///Metodo actualizar libro por id
+    public boolean actualizarAmigo(Amigo amigo, String correo) {
+        int indice = this.buscarIndiceAmigo(correo);
+        if(indice >= 0){
+            this.amigos.set(indice, amigo);
+            return true;
+        }
+        return false; 
+    }
+    
     public Amigo buscarAmigo(String correo) {
         //Excepción (?
         for (Amigo a : amigos) {
@@ -28,15 +48,6 @@ public class DirectorioDeAmistades {
             }
         }
         return null;
-    }
-
-    public String verInfoAmigo(String correoElectronico) {
-      for (Amigo a : amigos){
-          if(a.getCorreoElectronico().equals(correoElectronico)){
-              return a.toString();
-          }
-      }
-      return "No encontrado";
     }
 
     public boolean eliminarAmigo(String correoElectronico) {
@@ -48,5 +59,15 @@ public class DirectorioDeAmistades {
         }
         return false;
     }
-           
+          
+    
+    private int buscarIndiceAmigo(String correo) {
+    for (int i = 0; i < amigos.size(); i++) {
+        if (amigos.get(i).getCorreoElectronico().equals(correo)) {
+            return i; 
+        }
+    }
+    return -1; 
+}
+
 }

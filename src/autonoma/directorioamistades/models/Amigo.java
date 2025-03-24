@@ -7,9 +7,21 @@ package autonoma.directorioamistades.models;
  * 3/24/25
  */
 public class Amigo extends Persona {
-    public Amigo(String nombres, int telefono, String correoElectronico) {
+    private String redSocial;
+    public Amigo(String nombres, int telefono, String correoElectronico, String redSocial) {
         super(nombres, telefono, correoElectronico);
+        this.redSocial = redSocial;
     } 
+
+    public String getRedSocial() {
+        return redSocial;
+    }
+
+    public void setRedSocial(String redSocial) {
+        this.redSocial = redSocial;
+    }
+    
+    
     
     @Override
     public String toString(){
