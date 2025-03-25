@@ -4,9 +4,15 @@
  */
 package autonoma.directorioamistades.views;
 
+import autonoma.directorioamistades.exceptions.AmigoduplicadoException;
+import autonoma.directorioamistades.exceptions.CorreoInvalidoException;
+import autonoma.directorioamistades.exceptions.DatosObligatoriosException;
+import autonoma.directorioamistades.exceptions.TelefonoInvalidoException;
+import autonoma.directorioamistades.models.Amigo;
 import autonoma.directorioamistades.models.DirectorioDeAmistades;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -54,7 +60,7 @@ public class VentanaAgregar extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         txtCorreo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txtTelefono1 = new javax.swing.JTextField();
+        txtRedSocial = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -126,9 +132,9 @@ public class VentanaAgregar extends javax.swing.JDialog {
         jLabel7.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel7.setText("Red Social:");
 
-        txtTelefono1.addActionListener(new java.awt.event.ActionListener() {
+        txtRedSocial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTelefono1ActionPerformed(evt);
+                txtRedSocialActionPerformed(evt);
             }
         });
 
@@ -239,7 +245,7 @@ public class VentanaAgregar extends javax.swing.JDialog {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel7)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtTelefono1))
+                                    .addComponent(txtRedSocial))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel6)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -271,7 +277,7 @@ public class VentanaAgregar extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefono1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRedSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -305,12 +311,42 @@ public class VentanaAgregar extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
 
-    private void txtTelefono1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefono1ActionPerformed
+    private void txtRedSocialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRedSocialActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtTelefono1ActionPerformed
+    }//GEN-LAST:event_txtRedSocialActionPerformed
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
+        if(txtNombre.getText().trim().isEmpty() || txtTelefono.getText().trim().isEmpty() || txtCorreo.getText().trim().isEmpty() || txtRedSocial.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "¡hay un campo vacio!");
+            return;
+        }
+    try {
+        String nombre = this.txtNombre.getText();
+        int telefono = Integer.parseInt(txtTelefono.getText());
+        String correo = this.txtCorreo.getText();
+        String redS = this.txtRedSocial.getText();
+
+        Amigo a = new Amigo(nombre, telefono, correo, redS);
+
+        if (this.directorio.agregarAmigo(a)) {
+            JOptionPane.showMessageDialog(null, "El amigo " + nombre + " fue agregado exitosamente!!");
+            this.dispose(); 
+        }
         
+    } catch (NumberFormatException e) { 
+            JOptionPane.showMessageDialog(this, "Error: El teléfono debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (DatosObligatoriosException e) {
+            JOptionPane.showMessageDialog(this, "Error: Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (CorreoInvalidoException e) {
+            JOptionPane.showMessageDialog(this, "Error: El correo ingresado no es válido. Debe contener (@)", "Error", JOptionPane.ERROR_MESSAGE);
+   } catch (TelefonoInvalidoException e) {
+            JOptionPane.showMessageDialog(this, "Error: El teléfono debe comenzar con 606 o 30.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (AmigoduplicadoException e) {
+            JOptionPane.showMessageDialog(this, "Error: Este amigo ya está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (Exception e) { 
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
     }//GEN-LAST:event_btnAgregarMouseClicked
 
     private void btnAgregarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseEntered
@@ -332,8 +368,7 @@ public class VentanaAgregar extends javax.swing.JDialog {
     private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
        this.mouseExited(btnSalir);
     }//GEN-LAST:event_btnSalirMouseExited
-
-    
+      
     
     
     
@@ -366,7 +401,7 @@ public class VentanaAgregar extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtRedSocial;
     private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtTelefono1;
     // End of variables declaration//GEN-END:variables
 }

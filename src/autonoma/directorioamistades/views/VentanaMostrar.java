@@ -4,11 +4,13 @@
  */
 package autonoma.directorioamistades.views;
 
+import autonoma.directorioamistades.exceptions.AmigoNoEncontradoException;
 import autonoma.directorioamistades.models.Amigo;
 import autonoma.directorioamistades.models.DirectorioDeAmistades;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -111,6 +113,9 @@ public class VentanaMostrar extends javax.swing.JDialog {
 
         btnActualizar.setBackground(new java.awt.Color(120, 200, 190));
         btnActualizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnActualizarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnActualizarMouseEntered(evt);
             }
@@ -148,6 +153,9 @@ public class VentanaMostrar extends javax.swing.JDialog {
 
         btnEliminar.setBackground(new java.awt.Color(120, 200, 190));
         btnEliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnEliminarMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnEliminarMouseEntered(evt);
             }
@@ -185,6 +193,9 @@ public class VentanaMostrar extends javax.swing.JDialog {
 
         btnSalir.setBackground(new java.awt.Color(120, 200, 190));
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnSalirMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnSalirMouseEntered(evt);
             }
@@ -296,6 +307,43 @@ public class VentanaMostrar extends javax.swing.JDialog {
     private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
        this.dispose();
     }//GEN-LAST:event_btnSalirMouseExited
+
+    private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
+        int fila = this.tablaAmigos.getSelectedRow(); 
+
+        if (fila == 0) { 
+            Amigo a = this.amigos.get(fila); 
+            int opc = JOptionPane.showConfirmDialog(this, "¿Desea eliminar al amigo: " + a.getNombres() + " permanentemente?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+
+            if (opc == JOptionPane.YES_OPTION) {
+                try {
+                    this.directorio.eliminarAmigo(a.getCorreoElectronico()); 
+                    this.amigos = this.directorio.getAmigos(); 
+                    this.llenarTabla(); 
+                    JOptionPane.showMessageDialog(null, "El amigo " + a.getNombres() + " fue eliminado exitosamente.");
+                } catch (AmigoNoEncontradoException e) {
+                    JOptionPane.showMessageDialog(null, "Error: El amigo no fue encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Por favor, seleccione el amigo que desea eliminar.");
+        }      
+    }//GEN-LAST:event_btnEliminarMouseClicked
+
+    private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
+        int fila = this.tablaAmigos.getSelectedRow();
+        if(fila == 0){
+            Amigo a = this.amigos.get(fila);
+            ActualizarAmigo ventana = new ActualizarAmigo(this, true, this.directorio, a);
+            ventana.setVisible(true);
+        }else{
+            JOptionPane.showMessageDialog(null, "porfavor selecciona el libro que deseas actualizar");
+        }
+    }//GEN-LAST:event_btnActualizarMouseClicked
+
+    private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
+        this.dispose();
+    }//GEN-LAST:event_btnSalirMouseClicked
 
     
     public void llenarTabla(){

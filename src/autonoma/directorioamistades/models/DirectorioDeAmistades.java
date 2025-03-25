@@ -1,5 +1,10 @@
 
 package autonoma.directorioamistades.models;
+import autonoma.directorioamistades.exceptions.AmigoNoEncontradoException;
+import autonoma.directorioamistades.exceptions.AmigoduplicadoException;
+import autonoma.directorioamistades.exceptions.CorreoInvalidoException;
+import autonoma.directorioamistades.exceptions.DatosObligatoriosException;
+import autonoma.directorioamistades.exceptions.TelefonoInvalidoException;
 import java.util.ArrayList;
 
 /**
@@ -23,9 +28,29 @@ public class DirectorioDeAmistades {
     }
     
     
-    public void agregarAmigo(Amigo a) {
-        //Verificacion (? excepción (?
-        amigos.add(a);
+    public boolean agregarAmigo(Amigo a)  throws AmigoduplicadoException, DatosObligatoriosException, CorreoInvalidoException, TelefonoInvalidoException  {
+    
+    if (a.getNombres().isEmpty() || a.getCorreoElectronico().isEmpty() || String.valueOf(a.getTelefono()).isEmpty()) {
+        throw new DatosObligatoriosException();
+    }
+    
+    if (a.getCorreoElectronico().indexOf("@") == -1) {
+        throw new CorreoInvalidoException();
+    }
+
+    String telefonoStr = String.valueOf(a.getTelefono());
+    if (!(telefonoStr.startsWith("606") || telefonoStr.startsWith("30"))) {
+        throw new TelefonoInvalidoException();
+    }
+
+    for (Amigo amigoExistente : amigos) {
+        if (amigoExistente.getCorreoElectronico().equals(a.getCorreoElectronico())) {
+            throw new AmigoduplicadoException();
+        }
+    }
+    
+    amigos.add(a);
+    return true;
     }
 
     
@@ -40,24 +65,24 @@ public class DirectorioDeAmistades {
         return false; 
     }
     
-    public Amigo buscarAmigo(String correo) {
-        //Excepción (?
+    public Amigo buscarAmigo(String correo) throws AmigoNoEncontradoException {
+
         for (Amigo a : amigos) {
             if (a.getCorreoElectronico().equals(correo)) {
                 return a;
             }
         }
-        return null;
+        throw new AmigoNoEncontradoException();
     }
 
-    public boolean eliminarAmigo(String correoElectronico) {
+    public boolean eliminarAmigo(String correoElectronico) throws AmigoNoEncontradoException{
        for(int i = 0; i < amigos.size(); i++){
            if (amigos.get(i).getCorreoElectronico().equals(correoElectronico)){
                 amigos.remove(i);
                 return true;
             }
         }
-        return false;
+          throw new AmigoNoEncontradoException();
     }
           
     

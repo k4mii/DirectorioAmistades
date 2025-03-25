@@ -1,8 +1,11 @@
 package autonoma.directorioamistades.views;
 
+import autonoma.directorioamistades.exceptions.AmigoNoEncontradoException;
+import autonoma.directorioamistades.models.Amigo;
 import autonoma.directorioamistades.models.DirectorioDeAmistades;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -236,11 +239,25 @@ public class Ventanabuscar extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirMouseClicked
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-    
+        try {
+            String correo = this.txtCorreo.getText().trim(); 
+            Amigo a = this.directorio.buscarAmigo(correo);
+
+            JOptionPane.showMessageDialog(null, "El amigo con correo: " + correo + " fue encontrado con éxito:\n" +
+                                            "Nombre: " + a.getNombres() + "\n" +
+                                            "Teléfono: " + a.getTelefono() + "\n" +
+                                            "Red Social: " + a.getRedSocial());
+
+            this.txtCorreo.setText("");
+
+        } catch (AmigoNoEncontradoException e) {
+        JOptionPane.showMessageDialog(null, "El amigo con el correo: " + this.txtCorreo.getText() + " no fue encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception e) { 
+        JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
     }//GEN-LAST:event_btnBuscarMouseClicked
 
-    
-    
     private void mouseEntered(JPanel panel){
         panel.setBackground(new Color(100, 180, 170));
     }
