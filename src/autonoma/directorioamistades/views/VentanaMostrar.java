@@ -333,7 +333,7 @@ public class VentanaMostrar extends javax.swing.JDialog {
             ActualizarAmigo ventana = new ActualizarAmigo(this, true, this.directorio, a);
             ventana.setVisible(true);
         }else{
-            JOptionPane.showMessageDialog(null, "porfavor selecciona el libro que deseas actualizar");
+            JOptionPane.showMessageDialog(null, "porfavor selecciona el amigo que deseas actualizar");
         }
     }//GEN-LAST:event_btnActualizarMouseClicked
 
