@@ -337,17 +337,15 @@ public class ActualizarAmigo extends javax.swing.JDialog {
         String Correo = this.txtAcCorreo.getText();
         String RedS = this.txtAcRedS.getText();
 
-        this.amigo.setNombres(Nombre);  
-        this.amigo.setTelefono(Telefono); 
-        this.amigo.setCorreoElectronico(Correo);  // Puede lanzar CorreoInvalidoException
-        this.amigo.setRedSocial(RedS);  
+        Amigo amigoActualizado = new Amigo(Nombre, Telefono, Correo, RedS);
 
-        this.directorio.actualizarAmigo(this.amigo, this.amigo.getCorreoElectronico());
-        JOptionPane.showMessageDialog(null, "El amigo: " + this.amigo.getNombres() + " fue actualizado exitosamente");
+        this.directorio.actualizarAmigo(amigoActualizado, this.amigo.getCorreoElectronico());
+
+        JOptionPane.showMessageDialog(null, "El amigo: " + amigoActualizado.getNombres() + " fue actualizado exitosamente");
         this.dispose();
 
     } catch (CorreoInvalidoException e) {
-        JOptionPane.showMessageDialog(null, "Error: El correo ingresado no es válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Error: El correo ingresado no es valido.", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     }//GEN-LAST:event_btnActualizarMouseClicked

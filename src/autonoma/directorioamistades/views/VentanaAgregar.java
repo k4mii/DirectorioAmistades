@@ -331,20 +331,22 @@ public class VentanaAgregar extends javax.swing.JDialog {
         if (this.directorio.agregarAmigo(a)) {
             JOptionPane.showMessageDialog(null, "El amigo " + nombre + " fue agregado exitosamente!!");
             this.dispose(); 
+        }else {
+            JOptionPane.showMessageDialog(this, "Error: No se pudo agregar el amigo.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     } catch (NumberFormatException e) { 
-            JOptionPane.showMessageDialog(this, "Error: El teléfono debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error: El telefono debe ser un numero valido.", "Error", JOptionPane.ERROR_MESSAGE);
     } catch (DatosObligatoriosException e) {
             JOptionPane.showMessageDialog(this, "Error: Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
     } catch (CorreoInvalidoException e) {
-            JOptionPane.showMessageDialog(this, "Error: El correo ingresado no es válido. Debe contener (@)", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error: El correo ingresado no es valido. Debe contener (@)", "Error", JOptionPane.ERROR_MESSAGE);
    } catch (TelefonoInvalidoException e) {
-            JOptionPane.showMessageDialog(this, "Error: El teléfono debe comenzar con 606 o 30.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error: El telefono debe comenzar con 606 o 30.", "Error", JOptionPane.ERROR_MESSAGE);
     } catch (AmigoduplicadoException e) {
-            JOptionPane.showMessageDialog(this, "Error: Este amigo ya está registrado.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error: Este amigo ya esta registrado con el correo.", "Error", JOptionPane.ERROR_MESSAGE);
     } catch (Exception e) { 
-            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     }//GEN-LAST:event_btnAgregarMouseClicked

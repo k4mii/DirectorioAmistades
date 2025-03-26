@@ -311,7 +311,7 @@ public class VentanaMostrar extends javax.swing.JDialog {
     private void btnEliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEliminarMouseClicked
         int fila = this.tablaAmigos.getSelectedRow(); 
 
-        if (fila == 0) { 
+        if (fila >= 0) { 
             Amigo a = this.amigos.get(fila); 
             int opc = JOptionPane.showConfirmDialog(this, "¿Desea eliminar al amigo: " + a.getNombres() + " permanentemente?", "Confirmar eliminación", JOptionPane.YES_NO_OPTION);
 
@@ -332,7 +332,7 @@ public class VentanaMostrar extends javax.swing.JDialog {
 
     private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
         int fila = this.tablaAmigos.getSelectedRow();
-        if(fila == 0){
+        if(fila >= 0){
             Amigo a = this.amigos.get(fila);
             ActualizarAmigo ventana = new ActualizarAmigo(this, true, this.directorio, a);
             ventana.setVisible(true);
