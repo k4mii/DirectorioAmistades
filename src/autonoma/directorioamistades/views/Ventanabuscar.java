@@ -1,6 +1,9 @@
 package autonoma.directorioamistades.views;
 
 import autonoma.directorioamistades.exceptions.AmigoNoEncontradoException;
+import autonoma.directorioamistades.exceptions.CorreoInvalidoException;
+import autonoma.directorioamistades.exceptions.DatosObligatoriosException;
+import autonoma.directorioamistades.exceptions.ErrorInesperadoException;
 import autonoma.directorioamistades.models.Amigo;
 import autonoma.directorioamistades.models.DirectorioDeAmistades;
 import java.awt.Color;
@@ -240,21 +243,22 @@ public class Ventanabuscar extends javax.swing.JDialog {
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
         try {
-            String correo = this.txtCorreo.getText().trim(); 
-            Amigo a = this.directorio.buscarAmigo(correo);
+            String Correo = this.txtCorreo.getText().trim(); 
+            if(Correo.isEmpty()){
+                throw new DatosObligatoriosException();
+            }
+            Amigo a = this.directorio.buscarAmigo(Correo);
 
-            JOptionPane.showMessageDialog(null, "El amigo con correo: " + correo + " fue encontrado con éxito:\n" +
+            JOptionPane.showMessageDialog(null, "El amigo con correo: " + Correo + " fue encontrado con éxito:\n" +
                                             "Nombre: " + a.getNombres() + "\n" +
                                             "Teléfono: " + a.getTelefono() + "\n" +
                                             "Red Social: " + a.getRedSocial());
 
             this.txtCorreo.setText("");
 
-        } catch (AmigoNoEncontradoException e) {
-        JOptionPane.showMessageDialog(null, "El amigo con el correo: " + this.txtCorreo.getText() + " no fue encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (Exception e) { 
-        JOptionPane.showMessageDialog(null, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        } catch (AmigoNoEncontradoException | CorreoInvalidoException | ErrorInesperadoException | DatosObligatoriosException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } 
 
     }//GEN-LAST:event_btnBuscarMouseClicked
 

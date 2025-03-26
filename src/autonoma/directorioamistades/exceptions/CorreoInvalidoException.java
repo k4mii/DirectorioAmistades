@@ -10,6 +10,6 @@ package autonoma.directorioamistades.exceptions;
  */
 public class CorreoInvalidoException extends RuntimeException{
     public CorreoInvalidoException(){
-        super("El correo es invalido, asegurate que contenga arroba (@)");
+        super("El correo es invalido, asegurate que contenga arroba (@) ;)");
     }
 }

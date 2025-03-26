@@ -8,8 +8,8 @@ package autonoma.directorioamistades.exceptions;
  *
  * @author Kamii
  */
-public class AmigoduplicadoException extends RuntimeException{
-    public AmigoduplicadoException(){
-        super("El correo ya se encuentra. Amigo duplicado :/");
+public class ErrorInesperadoException extends RuntimeException{
+    public ErrorInesperadoException(){
+        super("Ocurrio un error inesperado:( ");
     }
 }

@@ -7,10 +7,10 @@ package autonoma.directorioamistades.models;
  */
 public abstract class Persona {
     private String nombres;
-    private int telefono;
+    private long telefono;
     private String correoElectronico;
 
-    public Persona(String nombres, int telefono, String correoElectronico) {
+    public Persona(String nombres, long telefono, String correoElectronico) {
         this.nombres = nombres;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
@@ -21,7 +21,7 @@ public abstract class Persona {
         return nombres;
     }
 
-    public int getTelefono() {
+    public long getTelefono() {
         return telefono;
     }
 
@@ -33,7 +33,7 @@ public abstract class Persona {
         this.nombres = nombres;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(long telefono) {
         this.telefono = telefono;
     }
 

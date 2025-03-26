@@ -24,12 +24,13 @@ public class DirectorioDeAmistades {
 
     
 ///////////////////////////////////////////////////////////////////////
-    ///Metodo mostrar libros
+    ///Metodo mostrar amigos
     public ArrayList<Amigo> getAmigos(){
         return this.amigos;
     }
     
-    
+///////////////////////////////////////////////////////////////////////
+    ///Metodo ageregar Amigo    
     public boolean agregarAmigo(Amigo a)  throws AmigoduplicadoException, DatosObligatoriosException, CorreoInvalidoException, TelefonoInvalidoException  {
     
     if (a.getNombres().isEmpty() || a.getCorreoElectronico().isEmpty() || String.valueOf(a.getTelefono()).isEmpty()) {
@@ -57,26 +58,49 @@ public class DirectorioDeAmistades {
 
     
 ///////////////////////////////////////////////////////////////////////
-///Metodo actualizar libro por id
-    public boolean actualizarAmigo(Amigo amigo, String correo) {
+///Metodo actualizar amigo 
+    public boolean actualizarAmigo(Amigo amigo, String correo) throws CorreoInvalidoException, TelefonoInvalidoException, AmigoNoEncontradoException {
         int indice = this.buscarIndiceAmigo(correo);
-        if(indice >= 0){
-            this.amigos.set(indice, amigo);
-            return true;
+        
+        if (amigo.getCorreoElectronico().indexOf("@") == -1) {
+            throw new CorreoInvalidoException();
         }
-        return false; 
-    }
-    
-    public Amigo buscarAmigo(String correo) throws AmigoNoEncontradoException {
 
-        for (Amigo a : amigos) {
-            if (a.getCorreoElectronico().equals(correo)) {
-                return a;
+        String telefonoStr = String.valueOf(amigo.getTelefono());
+        if (indice == -1) {
+            throw new AmigoNoEncontradoException();
+        }
+        // se  verifica que el nuevo correo no pertenezca a otro amigo
+        for (int i = 0; i < amigos.size(); i++) {
+            if (i != indice && amigos.get(i).getCorreoElectronico().equals(amigo.getCorreoElectronico())) {
+                throw new AmigoduplicadoException();
             }
         }
-        throw new AmigoNoEncontradoException();
+    // Verifica que el numero solo tenga digitos y tenga 10 dígitos y empiece con 30 o 606
+        if (!telefonoStr.matches("^(30\\d{8}|606\\d{7})$")) {  
+            throw new TelefonoInvalidoException();
+        }
+        this.amigos.set(indice, amigo);
+        return true; 
     }
+///////////////////////////////////////////////////////////////////////
+    ///Metodo buscar amigo
+    public Amigo buscarAmigo(String correo) throws AmigoNoEncontradoException, CorreoInvalidoException {
+    ///Se hace una validacion para comprobar si tiene o no el "@"
+        if (correo.indexOf("@") == -1) {
+           throw new CorreoInvalidoException();
+       }
 
+       for (Amigo a : amigos) {
+           if (a.getCorreoElectronico().equals(correo)) {
+               return a;
+           }
+       }
+       throw new AmigoNoEncontradoException();
+   }
+
+///////////////////////////////////////////////////////////////////////
+    ///Metodo eliminar amigo
     public boolean eliminarAmigo(String correoElectronico) throws AmigoNoEncontradoException{
        for(int i = 0; i < amigos.size(); i++){
            if (amigos.get(i).getCorreoElectronico().equals(correoElectronico)){
@@ -87,14 +111,15 @@ public class DirectorioDeAmistades {
           throw new AmigoNoEncontradoException();
     }
           
-    
+///////////////////////////////////////////////////////////////////////
+    ///Metodo privado para encontrar la posición del amigo en la lista.
     private int buscarIndiceAmigo(String correo) {
-    for (int i = 0; i < amigos.size(); i++) {
-        if (amigos.get(i).getCorreoElectronico().equals(correo)) {
-            return i; 
+        for (int i = 0; i < amigos.size(); i++) {
+            if (amigos.get(i).getCorreoElectronico().equals(correo)) {
+                return i; 
+            }
         }
+        return -1; 
     }
-    return -1; 
-}
 
 }

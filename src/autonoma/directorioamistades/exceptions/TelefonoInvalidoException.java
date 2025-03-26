@@ -10,7 +10,7 @@ package autonoma.directorioamistades.exceptions;
  */
 public class TelefonoInvalidoException extends RuntimeException{
     public TelefonoInvalidoException(){
-        super("El telefono es invalido debe de iniciar por  por los dígitos (606 o 30)");
+        super("Ingrese un numero valido, que no contenga mas de 10 digitos y debe de iniciar por  por los dígitos (606 o 30) :)");
     }
     
 }
