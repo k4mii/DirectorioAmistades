@@ -10,6 +10,6 @@ package autonoma.directorioamistades.exceptions;
  */
 public class DatosObligatoriosException extends RuntimeException{
     public DatosObligatoriosException(){
-        super("Todos los datos son obligatorios."); 
+        super("Todos los datos deben ser obligatorios:)"); 
     }
 }

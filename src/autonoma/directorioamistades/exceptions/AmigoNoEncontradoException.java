@@ -10,6 +10,6 @@ package autonoma.directorioamistades.exceptions;
  */
 public class AmigoNoEncontradoException extends RuntimeException{
     public AmigoNoEncontradoException(){
-        super(" El amigo no se encontro ");
+        super(" El amigo no se encontro :(");
     }
 }

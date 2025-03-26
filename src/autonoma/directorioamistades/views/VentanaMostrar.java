@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package autonoma.directorioamistades.views;
 
 import autonoma.directorioamistades.exceptions.AmigoNoEncontradoException;
@@ -344,8 +340,6 @@ public class VentanaMostrar extends javax.swing.JDialog {
     private void btnSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseClicked
         this.dispose();
     }//GEN-LAST:event_btnSalirMouseClicked
-
-    
     public void llenarTabla(){
         DefaultTableModel modelDefault = new DefaultTableModel(new String[]{"Nombres", "Telefono", "Correo electronico", "Red Social"}, this.amigos.size());
         this.tablaAmigos.setModel(modelDefault);
@@ -360,8 +354,6 @@ public class VentanaMostrar extends javax.swing.JDialog {
             dataModel.setValueAt(l.getCorreoElectronico(), i ,2 );
             dataModel.setValueAt(l.getRedSocial(), i ,3 );
         }
-        
-        
     }
     
     private void mouseEntered(JPanel panel){

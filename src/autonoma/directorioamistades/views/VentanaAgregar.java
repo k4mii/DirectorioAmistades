@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package autonoma.directorioamistades.views;
 
 import autonoma.directorioamistades.exceptions.AmigoduplicadoException;
 import autonoma.directorioamistades.exceptions.CorreoInvalidoException;
 import autonoma.directorioamistades.exceptions.DatosObligatoriosException;
+import autonoma.directorioamistades.exceptions.ErrorInesperadoException;
 import autonoma.directorioamistades.exceptions.TelefonoInvalidoException;
 import autonoma.directorioamistades.models.Amigo;
 import autonoma.directorioamistades.models.DirectorioDeAmistades;
@@ -316,38 +314,33 @@ public class VentanaAgregar extends javax.swing.JDialog {
     }//GEN-LAST:event_txtRedSocialActionPerformed
 
     private void btnAgregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseClicked
-        if(txtNombre.getText().trim().isEmpty() || txtTelefono.getText().trim().isEmpty() || txtCorreo.getText().trim().isEmpty() || txtRedSocial.getText().trim().isEmpty()){
-            JOptionPane.showMessageDialog(null, "¡hay un campo vacio!");
-            return;
-        }
-    try {
-        String nombre = this.txtNombre.getText();
-        int telefono = Integer.parseInt(txtTelefono.getText());
-        String correo = this.txtCorreo.getText();
-        String redS = this.txtRedSocial.getText();
 
-        Amigo a = new Amigo(nombre, telefono, correo, redS);
+    try {
+        String Nombre = this.txtNombre.getText().trim();
+        String TelefonoStr = txtTelefono.getText().trim();
+        String Correo = this.txtCorreo.getText().trim();
+        String RedS = this.txtRedSocial.getText().trim();
+        
+        if (Nombre.isEmpty() || TelefonoStr.isEmpty() || Correo.isEmpty() || RedS.isEmpty()) {
+            throw new DatosObligatoriosException();
+        }
+       
+// Verifica que el numero solo tenga digitos y tenga 10 dígitos y empiece con 30 o 606
+        if (!TelefonoStr.matches("^(30\\d{8}|606\\d{7})$")) { 
+            throw new TelefonoInvalidoException();
+        }
+        long Telefono = Long.parseLong(TelefonoStr);
+        Amigo a = new Amigo(Nombre, Telefono, Correo, RedS);
 
         if (this.directorio.agregarAmigo(a)) {
-            JOptionPane.showMessageDialog(null, "El amigo " + nombre + " fue agregado exitosamente!!");
+            JOptionPane.showMessageDialog(null, "El amigo " + Nombre + " fue agregado exitosamente!!");
             this.dispose(); 
         }else {
             JOptionPane.showMessageDialog(this, "Error: No se pudo agregar el amigo.", "Error", JOptionPane.ERROR_MESSAGE);
+        }  
+    }catch (CorreoInvalidoException | TelefonoInvalidoException | AmigoduplicadoException | DatosObligatoriosException | ErrorInesperadoException e) { 
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-    } catch (NumberFormatException e) { 
-            JOptionPane.showMessageDialog(this, "Error: El telefono debe ser un numero valido.", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (DatosObligatoriosException e) {
-            JOptionPane.showMessageDialog(this, "Error: Todos los campos son obligatorios.", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (CorreoInvalidoException e) {
-            JOptionPane.showMessageDialog(this, "Error: El correo ingresado no es valido. Debe contener (@)", "Error", JOptionPane.ERROR_MESSAGE);
-   } catch (TelefonoInvalidoException e) {
-            JOptionPane.showMessageDialog(this, "Error: El telefono debe comenzar con 606 o 30.", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (AmigoduplicadoException e) {
-            JOptionPane.showMessageDialog(this, "Error: Este amigo ya esta registrado con el correo.", "Error", JOptionPane.ERROR_MESSAGE);
-    } catch (Exception e) { 
-            JOptionPane.showMessageDialog(this, "Ocurrio un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
 
     }//GEN-LAST:event_btnAgregarMouseClicked
 

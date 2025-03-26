@@ -1,10 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
+
 package autonoma.directorioamistades.views;
 
+import autonoma.directorioamistades.exceptions.AmigoNoEncontradoException;
+import autonoma.directorioamistades.exceptions.AmigoduplicadoException;
 import autonoma.directorioamistades.exceptions.CorreoInvalidoException;
+import autonoma.directorioamistades.exceptions.DatosObligatoriosException;
+import autonoma.directorioamistades.exceptions.ErrorInesperadoException;
+import autonoma.directorioamistades.exceptions.TelefonoInvalidoException;
 import autonoma.directorioamistades.models.Amigo;
 import autonoma.directorioamistades.models.DirectorioDeAmistades;
 import java.awt.Color;
@@ -13,8 +15,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *
- * @author Kamii
+ * Interfaz grafica Ventana Buscar
+ * @author Maria camila Prada Cortes
+ * @since 20250324
+ * @version 1.0.0
  */
 public class ActualizarAmigo extends javax.swing.JDialog {
     private DirectorioDeAmistades directorio;
@@ -332,20 +336,24 @@ public class ActualizarAmigo extends javax.swing.JDialog {
 
     private void btnActualizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnActualizarMouseClicked
     try {
-        String Nombre = this.txtAcNombre.getText();
-        int Telefono = Integer.parseInt(this.txtAcTelefono.getText()); 
-        String Correo = this.txtAcCorreo.getText();
-        String RedS = this.txtAcRedS.getText();
-
+        String Nombre = this.txtAcNombre.getText().trim();
+        String TelefonoStr = this.txtAcTelefono.getText().trim();
+        String Correo = this.txtAcCorreo.getText().trim();
+        String RedS = this.txtAcRedS.getText().trim();
+// Verifica que el numero solo tenga digitos y tenga 10 dígitos y empiece con 30 o 606
+        if (!TelefonoStr.matches("^(30\\d{8}|606\\d{7})$")) { 
+            throw new TelefonoInvalidoException();
+        }
+        long Telefono = Long.parseLong(TelefonoStr);
         Amigo amigoActualizado = new Amigo(Nombre, Telefono, Correo, RedS);
 
         this.directorio.actualizarAmigo(amigoActualizado, this.amigo.getCorreoElectronico());
 
         JOptionPane.showMessageDialog(null, "El amigo: " + amigoActualizado.getNombres() + " fue actualizado exitosamente");
         this.dispose();
-
-    } catch (CorreoInvalidoException e) {
-        JOptionPane.showMessageDialog(null, "Error: El correo ingresado no es valido.", "Error", JOptionPane.ERROR_MESSAGE);
+        
+    } catch (CorreoInvalidoException | TelefonoInvalidoException | AmigoduplicadoException  | ErrorInesperadoException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 
     }//GEN-LAST:event_btnActualizarMouseClicked
