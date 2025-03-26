@@ -6,17 +6,19 @@ package autonoma.directorioamistades.models;
  * 3/24/25
  */
 public abstract class Persona {
+    // Atributos
     private String nombres;
     private long telefono;
     private String correoElectronico;
 
+    // Constructor
     public Persona(String nombres, long telefono, String correoElectronico) {
         this.nombres = nombres;
         this.telefono = telefono;
         this.correoElectronico = correoElectronico;
     }
 
-    
+    // Getters & Setters
     public String getNombres() {
         return nombres;
     }

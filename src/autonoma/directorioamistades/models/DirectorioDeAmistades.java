@@ -23,14 +23,13 @@ public class DirectorioDeAmistades {
     }
 
     
-///////////////////////////////////////////////////////////////////////
-    ///Metodo mostrar amigos
+    //////Metodo mostrar amigos
     public ArrayList<Amigo> getAmigos(){
         return this.amigos;
     }
     
-///////////////////////////////////////////////////////////////////////
-    ///Metodo ageregar Amigo    
+
+    ////// Metodo ageregar Amigo    
     public boolean agregarAmigo(Amigo a)  throws AmigoduplicadoException, DatosObligatoriosException, CorreoInvalidoException, TelefonoInvalidoException  {
     
     if (a.getNombres().isEmpty() || a.getCorreoElectronico().isEmpty() || String.valueOf(a.getTelefono()).isEmpty()) {
@@ -56,9 +55,8 @@ public class DirectorioDeAmistades {
     return true;
     }
 
-    
-///////////////////////////////////////////////////////////////////////
-///Metodo actualizar amigo 
+   //////////////////////////////////////////////// 
+///////Metodo actualizar amigo 
     public boolean actualizarAmigo(Amigo amigo, String correo) throws CorreoInvalidoException, TelefonoInvalidoException, AmigoNoEncontradoException {
         int indice = this.buscarIndiceAmigo(correo);
         
@@ -83,10 +81,10 @@ public class DirectorioDeAmistades {
         this.amigos.set(indice, amigo);
         return true; 
     }
-///////////////////////////////////////////////////////////////////////
-    ///Metodo buscar amigo
+//////////////////////////////////////////////
+    ////// Metodo buscar amigo
     public Amigo buscarAmigo(String correo) throws AmigoNoEncontradoException, CorreoInvalidoException {
-    ///Se hace una validacion para comprobar si tiene o no el "@"
+    //// Se hace una validacion para comprobar si tiene o no el "@"
         if (correo.indexOf("@") == -1) {
            throw new CorreoInvalidoException();
        }
@@ -99,7 +97,7 @@ public class DirectorioDeAmistades {
        throw new AmigoNoEncontradoException();
    }
 
-///////////////////////////////////////////////////////////////////////
+/////////////////////////////////////
     ///Metodo eliminar amigo
     public boolean eliminarAmigo(String correoElectronico) throws AmigoNoEncontradoException{
        for(int i = 0; i < amigos.size(); i++){
