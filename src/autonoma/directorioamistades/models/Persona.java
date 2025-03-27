@@ -2,7 +2,9 @@ package autonoma.directorioamistades.models;
 
 /**
  *
- * @author PABLO VI
+ * @author camila prada 
+ * version 1.0.0
+ * 3/24/25
  */
 public abstract class  Persona {
     private String nombres;

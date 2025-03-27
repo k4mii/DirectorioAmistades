@@ -13,7 +13,7 @@ import javax.swing.table.TableModel;
 
 /**
  * Interfaz grafica Ventana Buscar
- * @author Maria camila Prada Cortes
+ * @author Johan Villada
  * @since 20250324
  * @version 1.0.0
  */
@@ -318,7 +318,7 @@ public class VentanaMostrar extends javax.swing.JDialog {
                     this.llenarTabla(); 
                     JOptionPane.showMessageDialog(null, "El amigo " + a.getNombres() + " fue eliminado exitosamente.");
                 } catch (AmigoNoEncontradoException e) {
-                    JOptionPane.showMessageDialog(null, "Error: El amigo no fue encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } else {

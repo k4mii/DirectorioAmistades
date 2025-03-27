@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  * Interfaz grafica Ventana Principal
- * @author Maria camila Prada Cortes
+ * @author Johan Villada 
  * @since 20250324
  * @version 1.0.0
  */
@@ -54,6 +54,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        btnAcerca = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -164,7 +166,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addComponent(jLabel7))
                     .addComponent(jLabel5))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnMostrarLayout.setVerticalGroup(
             btnMostrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,25 +219,53 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnAcerca.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/directorioamistades/images/acerca.png"))); // NOI18N
+        btnAcerca.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAcercaMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnAcerca)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnAcerca, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 465, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(24, 24, 24)
                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addComponent(btnMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -253,7 +283,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 6, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -301,6 +331,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         Ventanabuscar ventana = new Ventanabuscar(this, true, this.directorio);
         ventana.setVisible(true);      
     }//GEN-LAST:event_btnBuscarMouseClicked
+
+    private void btnAcercaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAcercaMouseClicked
+       ventanaAcerca ventana = new ventanaAcerca(this, true, this.directorio);
+       ventana.setVisible(true);
+    }//GEN-LAST:event_btnAcercaMouseClicked
    
     
     private void mouseEntered(JPanel panel){
@@ -311,6 +346,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         panel.setBackground(new Color(120,200,190));
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel btnAcerca;
     private javax.swing.JPanel btnAgregar;
     private javax.swing.JPanel btnBuscar;
     private javax.swing.JPanel btnMostrar;
@@ -324,5 +360,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

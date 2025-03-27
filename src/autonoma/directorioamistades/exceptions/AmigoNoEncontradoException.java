@@ -5,8 +5,10 @@
 package autonoma.directorioamistades.exceptions;
 
 /**
- *
- * @author Kamii
+ * Interfaz grafica Ventana Buscar
+ * @author Johan Villada
+ * @since 20250324
+ * @version 1.0.0
  */
 public class AmigoNoEncontradoException extends RuntimeException{
     public AmigoNoEncontradoException(){

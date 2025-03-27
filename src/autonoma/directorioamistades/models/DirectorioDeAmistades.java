@@ -9,7 +9,9 @@ import java.util.ArrayList;
 
 /**
  *
- * @author johan 
+ * @author johan y camila prada
+ *  version 1.0.0
+ * 3/24/25
  */
 
 

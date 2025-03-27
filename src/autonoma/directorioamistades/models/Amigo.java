@@ -2,7 +2,7 @@ package autonoma.directorioamistades.models;
 
 /**
  *
- * @author johan villada yu camila prada 
+ * @author johan villada 
  * version 1.0.0
  * 3/24/25
  */
@@ -22,11 +22,4 @@ public class Amigo extends Persona {
     }
     
     
-    
-    @Override
-    public String toString(){
-        return "Nombres: "+ getNombres()+
-               "Telefono: "+ getTelefono()+
-               "Correo Electronico :"+ getCorreoElectronico();
-    }
 }
