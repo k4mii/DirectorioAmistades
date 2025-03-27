@@ -9,7 +9,9 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author Kamii
+ * @author camila prada 
+ * version 1.0.0
+ * 3/26/25
  */
 public class ventanaAcerca extends javax.swing.JDialog {
      private DirectorioDeAmistades directorio;
